@@ -1,0 +1,2919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Interview Preparation - Complete CS Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter font */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #searchInput:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: #f8f9fa;
+            padding: 10px 20px;
+            gap: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #667eea;
+            user-select: none; /* Prevent text selection on click */
+        }
+
+        .tab:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 10px rgba(118, 75, 162, 0.2);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category {
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+            padding-left: 20px;
+        }
+
+        .category h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+            transition: all 0.3s;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+
+        .question {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0; /* Adjusted for better click handling */
+            font-size: 1.1em;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0; /* Added padding to make click target larger */
+        }
+
+        .toggle-icon {
+            color: #667eea;
+            font-size: 1.2em;
+            transition: transform 0.3s;
+            min-width: 20px; /* Ensure icon has space */
+            text-align: right;
+        }
+
+        .question-card.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .answer {
+            color: #555;
+            line-height: 1.8;
+            margin-top: 15px;
+            max-height: 0; /* Use max-height for smooth transition */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding-top: 0;
+            border-top: 1px solid transparent;
+        }
+
+        .answer.show {
+            max-height: 1200px; /* Increased max-height for new content */
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight {
+            /* Restoring a soft color and removing strong bolding */
+            background: #fcf8e3; /* Soft light yellow background */
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 500; /* Regular or semi-bold */
+            color: #333; /* Dark text for contrast */
+            white-space: normal; 
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-left: 10px;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .difficulty.easy {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .difficulty.medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .difficulty.hard {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .search-box, .content {
+                padding: 15px;
+            }
+            .tabs {
+                justify-content: flex-start;
+                padding: 10px;
+            }
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .stats {
+                flex-direction: column;
+                gap: 20px;
+                margin: 0;
+            }
+            .category {
+                padding-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Technical Interview Preparation</h1>
+            <p class="subtitle">Complete Computer Science Guide for UST & Tech Interviews</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search questions by keyword (e.g., 'polymorphism', 'binary tree', 'Docker')...">
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" data-section="oop">OOP</div>
+            <div class="tab" data-section="dsa">DSA</div>
+            <div class="tab" data-section="dbms">DBMS</div>
+            <div class="tab" data-section="os">Operating Systems</div>
+            <div class="tab" data-section="networks">Networks</div>
+            <div class="tab" data-section="web">Web Dev</div>
+            <div class="tab" data-section="system">System Design</div>
+            <div class="tab" data-section="coding">Coding Patterns</div>
+            <div class="tab" data-section="cloud_devops">Cloud/DevOps</div>
+            <div class="tab" data-section="ai_ml">AI/ML</div>
+        </div>
+
+        <div class="content">
+            <!-- OOP Section -->
+            <div class="section active" id="oop">
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Interview Ready</div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h2>Object-Oriented Programming & Principles</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are the four pillars of OOP? Explain each.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The four pillars are:<br><br>
+                            <span class="highlight">1. Encapsulation:</span> Bundling data and methods into a single unit (class) and restricting access to internal details. Use private variables with public getters/setters.<br><br>
+                            <span class="highlight">2. Inheritance:</span> Mechanism where a child class inherits properties and methods from a parent class. Promotes code reusability.<br><br>
+                            <span class="highlight">3. Polymorphism:</span> Ability to take many forms. Types: Compile-time (method overloading) and Runtime (method overriding).<br><br>
+                            <span class="highlight">4. Abstraction:</span> Hiding implementation details and showing only essential features. Achieved through abstract classes and interfaces.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Difference between Abstract Class and Interface?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Abstract Class:</span><br>
+                            - Can have both abstract and concrete methods<br>
+                            - Can have constructors<br>
+                            - Can have instance variables (any access modifier)<br>
+                            - Supports single inheritance<br>
+                            - Use when classes share common behavior<br><br>
+                            <span class="highlight">Interface:</span><br>
+                            - Only abstract methods (Java 7) or default/static methods (Java 8+)<br>
+                            - Cannot have constructors<br>
+                            - Variables are public static final by default<br>
+                            - Supports multiple inheritance<br>
+                            - Use to define a contract that classes must follow
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is method overloading vs method overriding?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Method Overloading (Compile-time Polymorphism):</span><br>
+                            - Multiple methods with same name but different parameters<br>
+                            - Happens in the same class<br>
+                            - Parameters must differ in number, type, or order<br><br>
+                            <span class="highlight">Method Overriding (Runtime Polymorphism):</span><br>
+                            - Subclass provides specific implementation of parent class method<br>
+                            - Same method signature (name, parameters, return type)<br>
+                            - Requires inheritance
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Composition vs Inheritance: When to use which?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            This addresses the "is-a" versus "has-a" relationship.<br><br>
+                            <span class="highlight">Inheritance (is-a):</span> A subclass inherits properties of its parent. Use when one object *is* a type of another (e.g., Dog is an Animal). Best for defining a general type hierarchy.<br><br>
+                            <span class="highlight">Composition (has-a):</span> A class contains instances of other classes to gain their functionality. Use when one object *has* another (e.g., Car has an Engine). This is generally preferred for flexibility and avoiding the rigid structure of inheritance.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Thread Safety, Immutability, and Synchronization in OOP.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Thread Safety:</span> Code is thread-safe if it can be executed concurrently by multiple threads without causing race conditions or data corruption.<br><br>
+                            <span class="highlight">Immutability:</span> An object whose state cannot be modified after it is created. Immutable objects are inherently thread-safe as their state never changes, eliminating the need for explicit locking.<br><br>
+                            <span class="highlight">Synchronization:</span> A mechanism (like locks or mutexes) used to control access to shared resources by multiple threads. It ensures that only one thread can access a critical section of code at a time, preventing race conditions.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Garbage Collection process and its goals.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Garbage Collection (GC)</span> is a form of automatic memory management that attempts to reclaim memory occupied by objects that are no longer referenced by the program (unreachable memory).<br><br>
+                            <strong>Goals:</strong> Free the programmer from manual memory deallocation, prevent memory leaks, and minimize "stop-the-world" pauses (where the application freezes during collection). GC relies on the **"Reachability"** concept to identify live objects.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the SOLID principles in detail.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">SOLID</span> is an acronym for five design principles intended to make software designs more understandable, flexible, and maintainable.
+                            1. <span class="highlight">S - Single Responsibility Principle:</span> A class should have only one reason to change.
+                            2. <span class="highlight">O - Open/Closed Principle:</span> Software entities should be open for extension but closed for modification.
+                            3. <span class="highlight">L - Liskov Substitution Principle:</span> Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.
+                            4. <span class="highlight">I - Interface Segregation Principle:</span> Clients should not be forced to depend on interfaces they do not use.
+                            5. <span class="highlight">D - Dependency Inversion Principle:</span> High-level modules should not depend on low-level modules; both should depend on abstractions.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Design Patterns and name three common ones.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Design Patterns</span> are reusable solutions to common problems in software design.
+                            - <span class="highlight">Singleton (Creational):</span> Ensures a class has only one instance and provides a global point of access.
+                            - <span class="highlight">Factory Method (Creational):</span> Defines an interface for creating an object, but lets subclasses decide which class to instantiate.
+                            - <span class="highlight">Observer (Behavioral):</span> Defines a one-to-many dependency so that when one object changes state, all its dependents are notified and updated automatically.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Association, Aggregation, and Composition.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            These describe relationships between objects (Classes).
+                            - <span class="highlight">Association:</span> A weak link where one class uses another.
+                            - <span class="highlight">Aggregation (Has-A, Weak):</span> "A contains B, but B can exist without A." (e.g., Department $\to$ Teacher).
+                            - <span class="highlight">Composition (Has-A, Strong):</span> "A contains B, and B cannot exist without A." (e.g., Car $\to$ Engine).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between Stack and Heap memory in OOP.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - <span class="highlight">Stack:</span> Used for static memory allocation. Stores local variables, function calls, and reference variables (pointers). Fast access. Memory is managed automatically by OS (LIFO).
+                            - <span class="highlight">Heap:</span> Used for dynamic memory allocation. Stores actual objects (instances). Slower access. Managed by the Garbage Collector.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Operator Overloading?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Operator Overloading</span> is a form of polymorphism where operators (like $+, -, \times$) are redefined to perform specific operations based on the types of the operands. This allows for defining custom behaviors for standard operators when applied to user-defined objects.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the purpose of the `super` keyword.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The <span class="highlight">`super` keyword</span> is used inside a subclass method or constructor to refer to the immediate parent class's members (variables, methods, or constructors). It is primarily used to invoke the parent class constructor or to access an overridden method from the parent class.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a wrapper class? Give an example.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Wrapper Class</span> is a class that encapsulates a primitive data type within an object. This is necessary in many frameworks/collections that can only handle object types.
+                            - <span class="highlight">Example:</span> `int` (primitive) is wrapped by the `Integer` (class).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the principle of "Program to an Interface, not an Implementation."
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            This principle promotes flexibility and loose coupling. When you program to an <span class="highlight">interface</span> (abstraction), you rely on the contract defined by the interface, not the specific details of a concrete class. This allows you to easily swap out implementations without changing the calling code.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Covariance and Contravariance.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            These relate to type safety during polymorphism (subtyping).
+                            - <span class="highlight">Covariance:</span> Allows a method to return a **more specific** type than its parent's method (subclass return type).
+                            - <span class="highlight">Contravariance:</span> Allows a method to accept arguments of a **more general** type than its parent's method (superclass argument type).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is multiple inheritance and why do languages like Java avoid it for classes?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Multiple Inheritance</span> allows a class to inherit from more than one direct parent class. Java avoids it for classes because it leads to the <span class="highlight">Diamond Problem</span>, creating ambiguity about which parent's method implementation to use, making code unreliable. (It supports multiple inheritance of type via interfaces).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Dependency Injection (DI) and Inversion of Control (IoC).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - <span class="highlight">Inversion of Control (IoC):</span> A principle where the flow of a program is inverted; the framework or runtime controls the flow, not the application code.
+                            - <span class="highlight">Dependency Injection (DI):</span> A concrete technique to achieve IoC, where objects receive the objects they depend on (their dependencies) from an external source (usually a container) rather than creating them internally.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are inner classes and static nested classes?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Inner classes</span> are associated with an instance of the outer class and can access all its members (even private ones). <span class="highlight">Static nested classes</span> are also defined inside another class but behave like top-level classes and cannot access non-static members of the outer class.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between early binding (static) and late binding (dynamic).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - <span class="highlight">Early Binding (Static):</span> The linking of a function call to a definition is done at **compile time**. Primarily applies to method overloading. Faster execution.
+                            - <span class="highlight">Late Binding (Dynamic):</span> The linking is deferred until **runtime**. The decision is based on the actual object type, allowing runtime polymorphism. Primarily applies to method overriding.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the Diamond Problem in multiple inheritance?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The <span class="highlight">Diamond Problem</span> occurs when a class inherits from two classes that both inherit from a common parent class, creating ambiguity about which parent's method to use.
+                            <span class="highlight">Example:</span> Class D inherits from B and C, which both inherit from A. If A has a method, which version does D use?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DSA Section -->
+            <div class="section" id="dsa">
+                <div class="category">
+                    <h2>Data Structures & Algorithms</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain time complexity and Big O notation with examples.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Time Complexity</span> measures how execution time grows with input size (n).<br><br>
+                            <strong>Common complexities:</strong><br>
+                            • <span class="highlight">O(1) - Constant:</span> Array access, hash table lookup<br>
+                            • <span class="highlight">O(log n) - Logarithmic:</span> Binary search<br>
+                            • <span class="highlight">O(n) - Linear:</span> Linear search, array traversal<br>
+                            • <span class="highlight">O(n log n) - Log-linear:</span> Merge sort, quicksort (average)<br>
+                            • <span class="highlight">O(n²) - Quadratic:</span> Bubble sort, nested loops<br>
+                            • <span class="highlight">O(2ⁿ) - Exponential:</span> Recursive Fibonacci<br><br>
+                            <strong>Rule:</strong> Drop constants and lower-order terms. O(3n² + 5n + 2) $\to$ O(n²)
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Array vs Linked List - When to use which?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Array:</span><br>
+                            ✓ Random access: O(1)<br>
+                            ✓ Cache-friendly (contiguous memory)<br>
+                            ✗ Fixed size (or expensive resize)<br>
+                            ✗ Insertion/deletion: O(n)<br>
+                            <span class="highlight">Use when:</span> Need frequent random access, size known<br><br>
+                            <span class="highlight">Linked List:</span><br>
+                            ✓ Dynamic size<br>
+                            ✓ Insertion/deletion at known position: O(1)<br>
+                            ✗ Random access: O(n)<br>
+                            ✗ Extra memory for pointers<br>
+                            <span class="highlight">Use when:</span> Frequent insertions/deletions, size unknown
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain different types of trees and their use cases.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">1. Binary Tree:</span> Each node has at most 2 children<br>
+                            <span class="highlight">2. Binary Search Tree (BST):</span> Left < Root < Right. Search/Insert/Delete: O(log n) average, O(n) worst<br>
+                            <span class="highlight">3. AVL Tree:</span> Self-balancing BST. Height difference $\le 1$. Guaranteed O(log n)<br>
+                            <span class="highlight">4. Red-Black Tree:</span> Self-balancing with color property. Used in TreeMap, TreeSet<br>
+                            <span class="highlight">5. B-Tree:</span> Multi-way tree for disk storage. Used in databases, file systems<br>
+                            <span class="highlight">6. Heap:</span> Complete binary tree. Min-heap (parent < children) or Max-heap. Used in priority queues<br>
+                            <span class="highlight">7. Trie:</span> Tree for strings. Each node represents a character. Used in autocomplete, spell checkers
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is hashing? Explain collision resolution techniques.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Hashing</span> converts a key into an index using a hash function for O(1) average-case operations.<br><br>
+                            <strong>Collision Resolution:</strong><br><br>
+                            <span class="highlight">1. Separate Chaining:</span> Each bucket has a linked list.<br>
+                            <span class="highlight">2. Open Addressing:</span> All elements stored in array itself (Linear/Quadratic Probing or Double Hashing).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain BFS vs DFS. When to use each?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">BFS (Breadth-First Search):</span> Explores level by level using **Queue**. Finds **shortest path** in unweighted graphs. Space: $O(w)$.<br><br>
+                            <span class="highlight">DFS (Depth-First Search):</span> Explores as deep as possible using **Stack/Recursion**. Used for topological sort, cycle detection, and backtracking. Space: $O(h)$.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Dynamic Programming? Explain with example.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Dynamic Programming (DP)</span> solves complex problems by breaking them into simpler **overlapping subproblems** and storing results (memoization/tabulation) to avoid recomputation. Requires **Optimal Substructure**. Used for problems like Fibonacci, Knapsack, and Longest Common Subsequence.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain different sorting algorithms and their complexities.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - <span class="highlight">Bubble/Selection/Insertion Sort:</span> $O(n^2)$ time, $O(1)$ space. Simple, slow.<br>
+                            - <span class="highlight">Merge Sort:</span> $O(n \log n)$ time, $O(n)$ space. Stable. Divide and conquer.<br>
+                            - <span class="highlight">Quick Sort:</span> $O(n \log n)$ average, $O(n^2)$ worst. $O(\log n)$ space. Unstable. Partition around pivot.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the three main Tree Traversal methods.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. <span class="highlight">In-order Traversal (Left, Root, Right):</span> Used for BSTs to retrieve data in sorted order.
+                            2. <span class="highlight">Pre-order Traversal (Root, Left, Right):</span> Used to create a copy of a tree.
+                            3. <span class="highlight">Post-order Traversal (Left, Right, Root):</span> Used to delete a tree (children before parent).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Compare Adjacency Matrix and Adjacency List for Graph representation.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Adjacency Matrix:</span> 2D array. Space: $O(V^2)$. Good for **dense** graphs. Edge check: $O(1)$.<br><br>
+                            <span class="highlight">Adjacency List:</span> Array of lists. Space: $O(V + E)$. Good for **sparse** graphs. Edge check: $O(\text{degree})$.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Amortized Analysis and when is it useful?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Amortized Analysis</span> calculates the average cost of a sequence of operations, where infrequent expensive operations are "paid for" by many inexpensive operations. It is useful when analyzing dynamic data structures like dynamic arrays (where resizing is rare and costly) or Fibonacci heaps.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Heap data structure and its time complexity for operations.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Heap</span> is a complete binary tree satisfying the heap property (Min or Max).
+                            - **Operations:** Insertion: $O(\log n)$, Deletion (of root): $O(\log n)$, Peek (of root): $O(1)$.
+                            - **Use Case:** Efficient Priority Queue implementation.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Trie (Prefix Tree) and where is it used?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Trie</span> is a tree structure used for storing strings where common prefixes are shared among nodes. Search/Insertion is $O(L)$, where $L$ is the length of the key.
+                            - **Use Cases:** Autocomplete features, spell checkers, and IP routing tables.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Stack and Queue.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - <span class="highlight">Stack (LIFO - Last In, First Out):</span> Push/Pop from the top. Use for function calls, expression evaluation.
+                            - <span class="highlight">Queue (FIFO - First In, First Out):</span> Enqueue at one end, Dequeue from the other. Use for job scheduling, BFS.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Skip List and how does it improve Linked List performance?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Skip List</span> is a probabilistic data structure built on top of multiple parallel sorted linked lists. It uses multiple "levels" of links to enable search operations in $O(\log n)$ average complexity, similar to a balanced BST.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Topological Sort.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Topological Sort</span> is a linear ordering of vertices in a **directed acyclic graph (DAG)** such that for every directed edge $u \to v$, vertex $u$ comes before vertex $v$. Used for scheduling tasks with dependencies.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the workings of Dijkstra's algorithm.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Dijkstra's algorithm</span> finds the **shortest paths** from a single source node to all other nodes in a graph with **non-negative edge weights**. It uses a **Min-Heap (Priority Queue)** to greedily select the unvisited node with the smallest known distance from the source.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are the components of a Hash Table (Hash Map)?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. **Key** (Input data). 2. **Hash Function** (Converts key to index). 3. **Bucket/Slot** (Index in array). 4. **Value** (Data stored). 5. **Collision Resolution** (Chaining/Open Addressing).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between $\Theta$ (Theta) and $O$ (Big O) notation?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - $O$ **(Big O):** Represents the **Upper Bound** (Worst Case) complexity. Guarantees the running time will not be *worse* than this function.
+                            - $\Theta$ **(Theta):** Represents the **Tight Bound** (Average/Exact Case) complexity. The running time is bounded both above and below by this function.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the use of a Minimum Spanning Tree (MST). Name two algorithms.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            An **MST** is a subgraph of an undirected, connected, weighted graph that connects all the vertices together, without any cycles, and with the **minimum possible total edge weight**.
+                            - **Algorithms:** **Kruskal's Algorithm** (uses DSU) and **Prim's Algorithm** (uses Priority Queue).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is an NP-complete problem?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **NP-complete** problems are the hardest problems in the NP complexity class (Non-deterministic Polynomial time). They are verifiable in polynomial time, and if an efficient (polynomial time) algorithm exists for *any* NP-complete problem, it exists for *all* of them. (e.g., Traveling Salesman, 3-SAT).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DBMS Section -->
+            <div class="section" id="dbms">
+                <div class="category">
+                    <h2>Database Management Systems & SQL</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain ACID properties with real-world examples.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">A - Atomicity:</span> All or nothing (Bank transfer fails midway, no money deducted).<br>
+                            <span class="highlight">C - Consistency:</span> Database moves from one valid state to another.<br>
+                            <span class="highlight">I - Isolation:</span> Concurrent transactions don't interfere (Two people booking last seat).<br>
+                            <span class="highlight">D - Durability:</span> Once committed, changes persist even after system failure.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Normalization? Explain up to 3NF with examples.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Normalization</span> organizes data to reduce redundancy and improve integrity.<br><br>
+                            <span class="highlight">1NF:</span> Atomic values (no multi-valued attributes).<br>
+                            <span class="highlight">2NF:</span> In 1NF + No partial dependency (non-key attribute depends on part of composite key).<br>
+                            <span class="highlight">3NF:</span> In 2NF + No transitive dependency (non-key $\to$ non-key).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Primary Key vs Foreign Key vs Unique Key vs Candidate Key?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Primary Key:</span> Uniquely identifies each record, cannot be NULL, only one per table.<br>
+                            <span class="highlight">Foreign Key:</span> References Primary Key of another table, can be NULL, enforces referential integrity.<br>
+                            <span class="highlight">Unique Key:</span> Ensures all values are unique, can have one NULL, multiple allowed.<br>
+                            <span class="highlight">Candidate Key:</span> Minimal set of attributes that can uniquely identify records. One becomes Primary Key.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain different types of JOINs with examples.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">1. INNER JOIN:</span> Only matching records.<br>
+                            <span class="highlight">2. LEFT JOIN:</span> All from left table + matching from right.<br>
+                            <span class="highlight">3. RIGHT JOIN:</span> All from right table + matching from left.<br>
+                            <span class="highlight">4. FULL JOIN:</span> All records from both tables, with NULLs where there is no match.
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question">
+                            What is an Index in a database and why is it used?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            An <span class="highlight">Index</span> is a data structure (like a B-Tree) that speeds up data retrieval.
+                            - **Uses:** Faster `SELECT` queries, especially with `WHERE` clauses.
+                            - **Trade-off:** Indexes consume space and slow down `INSERT`, `UPDATE`, and `DELETE` operations.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Transaction Isolation Levels.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Isolation levels define how and when the changes made by one transaction become visible to others:
+                            1. <span class="highlight">Read Uncommitted</span> (Allows Dirty Reads).
+                            2. <span class="highlight">Read Committed</span> (Prevents Dirty Reads).
+                            3. <span class="highlight">Repeatable Read</span> (Prevents Non-repeatable Reads).
+                            4. <span class="highlight">Serializable</span> (Prevents all anomalies).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between SQL and NoSQL databases?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">SQL (Relational):</span> Fixed schemas, vertical scaling, follows **ACID** (strong consistency). Used for complex joins/financial data.<br><br>
+                            <span class="highlight">NoSQL (Non-Relational):</span> Dynamic schemas, horizontal scaling, follows **BASE** (eventual consistency). Used for real-time data, flexible models.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain BCNF (Boyce-Codd Normal Form) and when it's necessary.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">BCNF</span> is stricter than 3NF. A table is in BCNF if and only if for every non-trivial functional dependency $X \to Y$, $X$ is a **superkey** of the relation. It's necessary when 3NF fails due to overlapping candidate keys that cause redundancy.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Denormalization and when is it justified?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Denormalization</span> is intentionally introducing redundancy to improve **read performance** (faster querying) at the expense of write performance and increased data redundancy. Common in OLAP/Reporting systems where analysis speed is paramount.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Stored Procedures and Triggers?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Stored Procedure:** A prepared SQL code segment saved in the database for execution on demand. Offers security and pre-compiled performance benefits.
+                            - **Trigger:** A stored procedure that automatically executes (fires) in response to a specific database event (`INSERT`, `UPDATE`, `DELETE`).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Difference between Clustered and Non-Clustered Indexes.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Clustered Index:** Determines the **physical order** of data storage on disk. A table can have **only one** (usually the Primary Key).
+                            - **Non-Clustered Index:** Does not change the physical order. It contains the index keys and **pointers** to the data location. A table can have **many**.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the three data anomalies in database design.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. **Insertion Anomaly:** Cannot insert data without also inserting unrelated data.
+                            2. **Deletion Anomaly:** Deleting one piece of data unintentionally removes other, necessary data.
+                            3. **Update Anomaly:** Modifying a data item requires updating multiple records, risking inconsistency.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is SQL Injection and how can it be prevented?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **SQL Injection** is a vulnerability allowing an attacker to interfere with database queries.
+                            - **Prevention:** Always use **Prepared Statements** (parameterized queries), which ensure user input is treated as data, not executable SQL code.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between OLAP and OLTP systems.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **OLTP (Online Transaction Processing):** Manages day-to-day transactions (e.g., e-commerce orders). High volume of small read/write/update operations. Focus on **ACID**.
+                            - **OLAP (Online Analytical Processing):** Analyzes large historical data sets. Low volume of complex read-only queries. Focus on reporting and data warehousing.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Database Schema vs Database Instance?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Schema:** The **design** or structure of the database (tables, constraints, relationships). It is static.
+                            - **Instance:** The actual **content** or snapshot of the data in the database at a specific moment in time. It is dynamic.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Two-Phase Commit (2PC).
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **2PC** is a protocol for distributed transactions ensuring all participating databases either **commit** or **abort** together.
+                            - **Phase 1 (Vote):** Coordinator asks participants to prepare and vote (YES/NO).
+                            - **Phase 2 (Decision):** If all vote YES, coordinator sends COMMIT. If any vote NO, coordinator sends ABORT.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Views in SQL and how are they used?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **View** is a virtual table based on the result-set of an SQL query. It acts as a security layer (showing only necessary columns/rows) and simplifies complex queries by pre-defining joins.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between TRUNCATE, DELETE, and DROP?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **TRUNCATE (DDL):** Removes all rows, keeps structure, fast, cannot be rolled back.
+                            - **DELETE (DML):** Removes specific rows (or all), keeps structure, slow, can be rolled back.
+                            - **DROP (DDL):** Removes the entire table (structure, data, and indexes). Cannot be rolled back.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a functional dependency in the context of normalization?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Functional Dependency** is a constraint where the values of one set of attributes ($A$) determine the values of another set ($B$). Notated as $A \to B$. It is the core concept used to define the normal forms.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are the isolation levels in SQL (Recap)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The four standard isolation levels: **Read Uncommitted**, **Read Committed**, **Repeatable Read**, and **Serializable**. They trade off concurrency (speed) against data integrity (preventing read anomalies).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operating Systems Section -->
+            <div class="section" id="os">
+                <div class="category">
+                    <h2>Operating Systems & Concurrency</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Process vs Thread: What's the difference?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Process:</span> An instance of a program being executed. Has its own **separate memory space**. IPC is expensive.<br><br>
+                            <span class="highlight">Thread:</span> A segment of a process. Threads within the same process **share the memory space**. Context switching is faster.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Deadlock? List the four necessary conditions.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Deadlock</span> occurs when two or more processes are blocked forever, waiting for resources held by each other.<br><br>
+                            <strong>Conditions:</strong> 1. **Mutual Exclusion**. 2. **Hold and Wait**. 3. **No Preemption**. 4. **Circular Wait**.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Paging and Segmentation in Memory Management.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Paging:</span> Divides logical space into fixed-size **Pages** and physical memory into fixed-size **Frames**. Solves external fragmentation.<br><br>
+                            <span class="highlight">Segmentation:</span> Divides logical space into variable-sized **Segments** (logical units like code/data).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe common CPU Scheduling Algorithms.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. **FCFS (First-Come, First-Served):** Simplest, non-preemptive.<br>
+                            2. **SJF (Shortest Job First):** Optimal for minimizing average wait time.<br>
+                            3. **Priority Scheduling:** Process with highest priority runs first (risks starvation).<br>
+                            4. **Round Robin:** Preemptive, uses time slices (fair for time-sharing systems).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Mutex vs Semaphore vs Monitor: Explain Synchronization Primitives.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Mutex:</span> A simple lock used for **Mutual Exclusion**. Only one thread can acquire it.<br><br>
+                            <span class="highlight">Semaphore:</span> A signaling mechanism (counter). Can be used for mutual exclusion (Binary Semaphore, count=1) or resource pooling (Counting Semaphore, count>1).<br><br>
+                            <span class="highlight">Monitor:</span> A higher-level construct combining critical section code and data, using a mutex and condition variables.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Virtual Memory and its main purpose.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Virtual Memory** uses disk storage (Swap Space) as an extension of RAM, creating the illusion of a very large, contiguous memory space. Its main purpose is to allow programs larger than physical RAM to run and to provide memory protection between processes.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a System Call? Give examples.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **System Call** is the mechanism used by application programs to request a service from the operating system's kernel. They provide an interface between a process and the OS.
+                            - **Examples:** `read()`, `write()`, `fork()`, `exit()`.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between User-Level Threads and Kernel-Level Threads.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **User-Level Threads:** Managed by the application library. Kernel is unaware. Fast switching, but entire process blocks if one thread blocks.<br>
+                            - **Kernel-Level Threads:** Managed directly by the OS. Slower switching, but better concurrency (one thread blocking doesn't stop the process).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Context Switching and its overhead.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Context Switching** is the process where the OS saves the state (context) of the current running process and loads the saved state of the next process. This process is pure **overhead** because no useful work is done, hence minimizing switches is key.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are the differences between Monolithic and Microkernel architectures?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Monolithic:** Entire OS kernel runs in a single address space. Fast but less reliable (a bug can crash the whole kernel).<br>
+                            - **Microkernel:** Only essential services (IPC, scheduling) run in kernel mode. Other services run as user-level processes. More reliable but slower due to message passing (IPC).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the various Inter-Process Communication (IPC) mechanisms.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            IPC methods: **Pipes** (simple, one-way), **Message Passing**, and **Shared Memory** (fastest, requires synchronization). **Sockets** are used for network communication.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Internal Fragmentation vs External Fragmentation?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Internal Fragmentation:** Unused space *within* an allocated memory block (e.g., wasted space inside a page frame).<br>
+                            - **External Fragmentation:** Total available memory is enough, but it is scattered in small, non-contiguous chunks, making it unusable. (Solved by Paging).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the concept of Thrashing in Virtual Memory?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Thrashing** is a condition where a process spends more time **paging** (swapping pages in and out of main memory) than **executing instructions**. It causes a drastic drop in system performance.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Banker's Algorithm for Deadlock Avoidance.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **Banker's Algorithm** determines if allocating resources to a requesting process will leave the system in a **safe state** (a sequence exists that can satisfy all processes without causing deadlock). It requires knowing the maximum resource needs in advance.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Race Condition? How is it resolved?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Race Condition** occurs when the outcome of a program depends on the unpredictable sequence of multiple threads accessing/modifying shared data.
+                            - **Resolution:** Use synchronization primitives like **Mutexes** or **Semaphores** to protect the **Critical Section** of code.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the common Page Replacement Algorithms.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. **FIFO (First-In, First-Out):** Removes the oldest page.<br>
+                            2. **LRU (Least Recently Used):** Removes the page that has not been used for the longest time (generally effective).<br>
+                            3. **Optimal (OPT):** Removes the page that will not be used for the longest period (impossible in practice).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Interrupts and Traps?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Interrupt:** A signal generated by **hardware** (e.g., I/O completion) to switch control to the kernel.<br>
+                            - **Trap (Software Interrupt):** A software-generated interrupt caused by an error (e.g., division by zero) or a deliberate request (e.g., a System Call).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of I/O Bound vs CPU Bound processes.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **I/O Bound:** A process that spends most of its time waiting for I/O operations (network, disk) to complete.<br>
+                            - **CPU Bound:** A process that spends most of its time executing instructions on the CPU (complex calculations).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Caching and Cache Coherency?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Caching:** Storing frequently accessed data in a smaller, faster memory closer to the processor.<br>
+                            - **Cache Coherency:** Ensuring that all copies of shared data across multiple caches (in a multi-core system) are consistent and up-to-date.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Kernel and what does it manage?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **Kernel** is the core component of the operating system. It manages and controls the system's hardware and software resources.
+                            - **Key tasks:** Process scheduling, memory management, I/O management, and security enforcement.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Networks Section -->
+            <div class="section" id="networks">
+                <div class="category">
+                    <h2>Computer Networks & Security</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Compare OSI and TCP/IP Models.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">OSI Model (7 Layers):</span> Theoretical, standard model.<br>
+                            <span class="highlight">TCP/IP Model (4/5 Layers):</span> Practical, used in the Internet. Combines Session, Presentation, and Application layers of OSI into one Application layer.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            TCP vs UDP: Explain the key differences and use cases.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">TCP:</span> **Connection-Oriented** (3-way handshake), **Reliable** (guarantees delivery/order), slower. Use for HTTP/S, FTP.<br><br>
+                            <span class="highlight">UDP:</span> **Connectionless**, **Unreliable** (best-effort), faster (low overhead). Use for DNS, VoIP, Gaming.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            How does DNS (Domain Name System) work?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            DNS translates domain names (example.com) into IP addresses. It uses a hierarchy (Local, Root, TLD, Authoritative servers) to recursively find the IP. The result is cached for speed.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between HTTP and HTTPS?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">HTTP:</span> Data is sent in plain text.<br><br>
+                            <span class="highlight">HTTPS:</span> Data is encrypted using **TLS/SSL**. Ensures **Confidentiality**, **Integrity**, and **Authentication**.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the high-level steps when typing a URL in a browser.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. **DNS Lookup** (URL to IP).<br>
+                            2. **TCP Handshake** (Connection setup).<br>
+                            3. **TLS/SSL Handshake** (Security setup, if HTTPS).<br>
+                            4. **HTTP Request** (GET request sent).<br>
+                            5. **Server Processing** (Response generated).<br>
+                            6. **Rendering** (Browser builds page).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a JWT (JSON Web Token) and how is it used for authentication?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">JWT</span> is a digitally signed, stateless token containing user claims. The client sends the JWT in the Authorization header. The server validates the signature without a database lookup, ensuring stateless and secure API communication.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the 3-Way Handshake in TCP connection establishment.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            1. **SYN:** Client sends synchronization request to server.<br>
+                            2. **SYN-ACK:** Server acknowledges (ACK) the client's request and sends its own SYN.<br>
+                            3. **ACK:** Client acknowledges the server's SYN. Connection is established.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Routing? Explain the difference between static and dynamic routing.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Routing** is selecting the path for network traffic.
+                            - **Static:** Paths are manually configured. Simple, but inflexible.
+                            - **Dynamic:** Paths are calculated automatically using **Routing Protocols** (OSPF, BGP) based on real-time network conditions. Flexible, but complex.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are the key differences between IPv4 and IPv6?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Address Size:** IPv4 is **32-bit**, IPv6 is **128-bit** (solves exhaustion).
+                            - **Security:** IPv6 has native support for **IPSec** (encryption/authentication).
+                            - **Notation:** IPv4 uses dotted decimal; IPv6 uses hexadecimal.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Network Latency and Bandwidth?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Bandwidth:** The maximum data rate (bits per second). The "width" of the pipe.<br>
+                            - **Latency:** The time delay for a bit of data to travel end-to-end. The "time" it takes to cross the pipe.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the purpose of NAT (Network Address Translation).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **NAT** maps many private IP addresses (internal network) to a few public IP addresses (internet). This conserves public IPv4 addresses and adds a basic layer of security by hiding internal host structures.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Socket APIs and Socket Programming?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Socket APIs** are the programming interfaces for networking. A **Socket** is an endpoint for network communication (IP address + Port Number). **Socket Programming** is writing applications that use these interfaces for network exchange.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            How does TCP handle Congestion Control?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            TCP regulates the data rate to prevent network overload using the **Congestion Window (cwnd)**. It employs algorithms like **Slow Start** (exponential increase) and **Congestion Avoidance** (linear increase/halving window size upon packet loss).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Hub, Switch, and Router.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Hub (Layer 1):** Broadcasts to all, based on signals.<br>
+                            - **Switch (Layer 2):** Intelligently forwards based on **MAC addresses** (within a LAN).<br>
+                            - **Router (Layer 3):** Connects different networks, forwards based on **IP addresses**.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is ARP (Address Resolution Protocol)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **ARP** maps an **IP address** (Layer 3) to a corresponding **MAC address** (Layer 2) within the same local network segment. Necessary for physical delivery of packets.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Port Numbers and their usage.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Port Numbers** (16-bit) identify specific **applications or services** running on a host. They allow multiple processes to share a single IP address (e.g., HTTP: 80, HTTPS: 443).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Firewall and its types?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Firewall** monitors and controls incoming/outgoing network traffic based on security rules.
+                            - **Types:** Packet-Filtering (basic check), Stateful Inspection (tracks connection state), and Application-Layer (checks content/most secure).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Subnetting (recap and expansion).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Subnetting** divides a large network into smaller subnetworks using a **Subnet Mask**. This reduces traffic (local traffic stays local), improves security, and efficiently manages IP address space.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is DHCP (Dynamic Host Configuration Protocol)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **DHCP** is a protocol that automatically assigns IP addresses, subnet masks, default gateways, and other network configuration parameters to devices on a network.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are the HTTP Response Status Codes and their classes?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **1xx:** Informational
+                            - **2xx:** Success (e.g., 200 OK)
+                            - **3xx:** Redirection (e.g., 301)
+                            - **4xx:** Client Error (e.g., 404 Not Found)
+                            - **5xx:** Server Error (e.g., 500 Internal Server Error)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web Dev Section -->
+            <div class="section" id="web">
+                <div class="category">
+                    <h2>Web Development & Advanced JavaScript</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Browser Rendering Process (Critical Rendering Path).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The process: 1. **DOM Tree** (from HTML). 2. **CSSOM Tree** (from CSS). 3. **Render Tree** (DOM+CSSOM). 4. **Layout** (Calculate positions). 5. **Paint** (Fill pixels).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the Event Loop in JavaScript?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The Event Loop allows single-threaded JavaScript to perform non-blocking asynchronous operations. It moves callbacks from the **Callback Queue** (or Task Queue) to the **Call Stack** only when the Stack is empty.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Difference between REST and GraphQL.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">REST:</span> Uses multiple endpoints, often leads to **over-fetching**.<br><br>
+                            <span class="highlight">GraphQL:</span> Uses a single endpoint. Client specifies *exactly* the data needed, optimizing transfer size.
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question">
+                            Explain `call()`, `apply()`, and `bind()` in JavaScript.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            These methods set the `this` context for a function.
+                            <span class="highlight">call():</span> Executes immediately, args individually.
+                            <span class="highlight">apply():</span> Executes immediately, args as an array.
+                            <span class="highlight">bind():</span> Returns a **new function** with the `this` context permanently set (used for deferred execution).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the difference between Local Storage, Session Storage, and Cookies.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Local Storage:</span> Persists after browser close. Max 5MB. Never sent to server.<br>
+                            <span class="highlight">Session Storage:</span> Cleared when tab closes. Max 5MB. Never sent to server.<br>
+                            <span class="highlight">Cookies:</span> Sent with every HTTP request. Max 4KB. Suitable for session management.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain JavaScript Closures and their usefulness.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Closure** is a function bundled with its surrounding state (lexical environment). It allows a function to access variables from an outer scope *even after* the outer function has finished execution. Used for **data privacy** and maintaining state in callbacks.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the JavaScript Prototype chain.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Every JS object links to a **Prototype** object. If a property is not found on the object itself, the engine searches up the chain of prototypes. This mechanism is how inheritance is implemented in JavaScript.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is CORS (Cross-Origin Resource Sharing) and how does it work?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **CORS** is a browser security mechanism that restricts cross-domain requests. For "complex" requests, the browser sends an automatic **Pre-flight Request** (`OPTIONS` verb) to the server to check the server's cross-origin policies (`Access-Control-Allow-Origin` header).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between == and === in JavaScript.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **`==` (Equality):** Performs **type coercion**. It tries to convert operands to a common type before comparison (`5 == '5'` is true).<br>
+                            - **`===` (Strict Equality):** Does **not** perform type coercion. Both value and type must match. (Always preferred for reliable comparison).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the V8 Engine and its role?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **V8** is Google's open-source JavaScript engine (used in Chrome and Node.js). Its role is to compile JavaScript directly into native machine code (JIT Compilation) rather than interpreting it, significantly improving performance.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Event Bubbling and Event Capturing.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Capturing (Top-down):** Event travels down the DOM tree from the `window` to the target element.<br>
+                            - **Bubbling (Bottom-up):** Event travels back up the DOM tree from the target element back to the `window`. Most events default to bubbling.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Web Workers and when should you use them?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Web Workers** allow JavaScript code to run in a background thread separate from the main execution thread of the browser. Use them for **computationally intensive tasks** (like large data processing) to prevent the main UI thread from blocking.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the use of `async`/`await` for promises. (Recap, focused on syntax).
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            `async`/`await` is syntactic sugar over Promises. `async` declares a function that returns a promise, and `await` pauses the execution of the `async` function until the promise settles, making asynchronous code look synchronous.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Difference between functional components and class components in React.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Class Components:** Use ES6 classes, manage state via lifecycle methods.
+                            - **Functional Components:** Simple JS functions. Use **Hooks** (`useState`, `useEffect`) to manage state and side effects. Now the preferred standard.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            How do you secure a web application against XSS (Cross-Site Scripting)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **XSS** involves injecting malicious client-side scripts.
+                            - **Prevention:** Always **sanitize** and **escape** user input when rendering content on the page, especially when inserting user-provided text into HTML elements.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the role of webpack or similar bundlers.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Bundlers** (Webpack, Parcel) analyze module dependencies and combine them into optimized static assets (bundles) for the browser. They handle transpilation (Babel), minification, and code splitting.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is SSR (Server-Side Rendering) vs CSR (Client-Side Rendering)?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **CSR:** Browser handles rendering via JS. Fast initial load, but poor SEO.<br>
+                            - **SSR:** Server renders full HTML page before sending. Great SEO and fast initial content display.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is immutability in the context of React/Redux state?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            State must be treated as **immutable**. When updating state (objects or arrays), you must create a **brand-new copy** with the changes, rather than modifying the original in place. This is crucial for performance (shallow comparison) and predictable data flow.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between `let`, `const`, and `var` in JavaScript.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **`var`:** Function-scoped, can be re-declared/re-assigned (Avoid).
+                            - **`let`:** **Block-scoped**, can be re-assigned, but not re-declared.
+                            - **`const`:** **Block-scoped**, cannot be re-assigned or re-declared (Preferred for constants).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the Box Model in CSS?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **CSS Box Model** defines how elements are laid out, composed of four layers from inner to outer: **Content**, **Padding** (inside border), **Border**, and **Margin** (outside border).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Design Section -->
+            <div class="section" id="system">
+                <div class="category">
+                    <h2>System Design & Distributed Systems</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Scalability? Differentiate Vertical vs Horizontal Scaling.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Scalability</span> is the ability of a system to handle increased load.<br><br>
+                            <span class="highlight">1. Vertical Scaling (Up):</span> Adding more resources (CPU, RAM) to a single server. Limited.<br><br>
+                            <span class="highlight">2. Horizontal Scaling (Out):</span> Adding more servers (machines). Virtually unlimited, but requires load balancing.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Load Balancer and why is it essential?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Load Balancer</span> distributes incoming network traffic across a group of backend servers. **Essential for:** High **Availability** (failover) and **Scalability** (distributing load).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Microservices Architecture.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Microservices</span> breaks a large Monolith into smaller, independent services. Each runs in its own process and communicates via REST/message queues. Advantages: Independent deployment, resilience.
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the CAP Theorem and its implications.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The <span class="highlight">CAP Theorem</span> states a distributed system can only guarantee two of three: **Consistency**, **Availability**, **Partition Tolerance**. **Implication:** Since P is mandatory in large-scale systems, you must choose between **CP** (Consistency over Availability) or **AP** (Availability over Consistency).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Data Sharding (Partitioning) and common keys.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Sharding</span> is horizontal scaling for databases, dividing data into smaller pieces (**shards**) across multiple database instances.
+                            - **Keys:** **Range-based** (e.g., User IDs 1-1000) or **Hash-based** (distributes load evenly).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is eventual consistency and how does it relate to the BASE principles?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Eventual Consistency:</span> If no new updates are made, all data replicas will eventually converge to the same value. It is the trade-off chosen when prioritizing **Availability** (AP systems).
+                            - **BASE (Basically Available, Soft state, Eventually consistent)** is the set of principles guiding NoSQL systems.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Message Queues and when should you use them?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Message Queues (MQs)** decouple and asynchronously connect services.
+                            - **Use Cases:** **Decoupling** services, **Buffering/Throttling** (handling traffic spikes), and running **Asynchronous Tasks** (e.g., sending emails).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Replication and its two main types.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Replication** is creating multiple copies of data across servers for High Availability and Read Scalability.
+                            - **Types:** **Leader-Follower (Master-Slave)** (reads from multiple, writes to one) and **Multi-Leader (Master-Master)** (writes to multiple, complex conflict resolution).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Latency and Throughput in system performance.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Latency:** The time delay for a **single operation** to complete (measured in ms).<br>
+                            - **Throughput:** The **number of operations** completed per unit of time (measured in RPS).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Bloom Filter and where is it used?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Bloom Filter** is a probabilistic data structure used to test set membership. It may produce **false positives** (says an element is present when it's not) but **never false negatives**. Used to reduce expensive disk lookups for non-existent keys (e.g., database caches).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Rate Limiting and why implement it?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Rate Limiting** controls the number of requests a user (or IP) can make to a server over a given period.
+                            - **Purpose:** Protect the service from DoS/DDoS attacks, prevent abusive scraping, and ensure fair resource usage.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Idempotency in API design.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            An operation is **idempotent** if applying it multiple times yields the same result as applying it once. Essential for handling network retries, as clients often retry timed-out requests. (`GET`, `PUT`, and `DELETE` should generally be idempotent).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            How is Leader Election performed in a distributed system?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Leader Election** is the process by which nodes agree on a single coordinator (leader). This is typically achieved using **Consensus Algorithms** like **Raft** or **Paxos**, which ensure that even if nodes fail, the cluster can reliably elect a new leader and maintain consistent state.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between Push and Pull mechanisms for data transfer.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Push:** Producer actively sends data to the consumer (e.g., WebSockets, server notifications). Good for low latency.
+                            - **Pull:** Consumer actively requests (polls) data from the producer (e.g., polling an API, message queue consumption). Good for flow control (consumer limits load).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Caching strategy, specifically Cache-Aside vs Write-Through?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Cache-Aside:** Application manages cache and database independently. (Most common).
+                            - **Write-Through:** Data is simultaneously written to both the cache and the database in one operation. Ensures consistency but adds write latency.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Why do we use Proxies (Forward and Reverse)?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Forward Proxy:** Hides the **client's** identity, filters outbound traffic, caches external resources.
+                            - **Reverse Proxy:** Hides the **server's** identity, handles load balancing, SSL termination, and security before traffic reaches the backend servers.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Horizontal vs Vertical Federation in databases.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Horizontal Federation (Sharding):** Different **rows** go to different databases (e.g., users A-M $\to$ DB1).
+                            - **Vertical Federation:** Different **columns/tables** go to different databases (e.g., User Login info $\to$ DB1, User Profile details $\to$ DB2).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between Consistency and Reliability in distributed systems?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Consistency:** Refers to the **data state**—ensuring all nodes see the same data (e.g., ACID).<br>
+                            - **Reliability:** Refers to the system's ability to **operate without failure** (e.g., High Availability, Fault Tolerance).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a CDN (Content Delivery Network)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **CDN** is a geographically distributed network of servers that caches static content (images, JS) at edge locations near the user. It **reduces latency**, improves speed, and **offloads traffic** from the origin server.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between SQL Sharding and NoSQL Partitioning?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Conceptually the same (horizontal partitioning). **Sharding** is typically applied to SQL tables and requires explicit logic for cross-shard joins. **Partitioning** is often native to NoSQL systems and is optimized for key-based lookups, avoiding complex joins.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coding Patterns Section -->
+            <div class="section" id="coding">
+                <div class="category">
+                    <h2>Advanced Coding Patterns</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the Sliding Window Pattern. Give a use case.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The <span class="highlight">Sliding Window</span> pattern uses two pointers (`start` and `end`) to efficiently process a contiguous sub-array/sub-string. It "slides" by adding an element at `end` and removing one at `start`, achieving $O(n)$ complexity.
+                            **Use Case:** Finding the Longest Substring with K Distinct Characters.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Two Pointers pattern. What are its variations?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The <span class="highlight">Two Pointers</span> pattern uses two indices to iterate through an array simultaneously.
+                            1. **Opposite Ends:** Used for sorted arrays (e.g., finding a pair that sums to a target).
+                            2. **Fast/Slow Pointers:** Used for Linked Lists (e.g., detecting a cycle).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Backtracking? How does it differ from DP?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Backtracking</span> explores all potential solutions incrementally (finding *all* solutions). If a path fails, it "backtracks" (undoes the last choice).<br><br>
+                            <span class="highlight">Dynamic Programming (DP)</span> uses memoization to store subproblem results (finding the *optimal* solution).
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Monotonic Stack/Queue pattern.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">Monotonic Stack/Queue</span> maintains elements in strictly increasing or decreasing order. Used to efficiently find the **Next Greater Element (NGE)** or **Previous Smaller Element (PSE)** for every element in an array in $O(n)$ time.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the use of Binary Search on the Answer.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            This pattern is used when the problem asks for the *minimum possible maximum* or *maximum possible minimum* value. You apply Binary Search not on the input array, but on the **range of possible answers**, using a helper function to check feasibility at each step.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Min-Heap/Max-Heap pattern? Give a typical problem type.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Heaps are used when you need the smallest or largest element efficiently.
+                            - **Typical Problem:** **Top K Elements.** To find the 'K' largest elements, use a **Min-Heap** of size $K$. This provides $O(n \log k)$ complexity.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the basic template for Breadth-First Search (BFS).
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            BFS uses a **Queue** (FIFO) to explore nodes layer by layer. It requires a `visited` set to prevent cycles and often finds the shortest path in unweighted graphs.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the basic template for Depth-First Search (DFS).
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            DFS uses a **Stack** (LIFO) or **recursion** to explore as deep as possible before backtracking. Requires a `visited` set to prevent cycles in graphs.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Two-Heaps pattern.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **Two-Heaps** pattern maintains the median of a stream of numbers efficiently. It uses a **Max-Heap** for the smaller half and a **Min-Heap** for the larger half, keeping them balanced (sizes differ by at most 1). Median lookup is $O(1)$.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the use of a Disjoint Set Union (DSU) / Union-Find structure?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **DSU** manages a collection of disjoint sets. Operations: **`Find(x)`** (returns set representative) and **`Union(x, y)`** (merges sets). Used for checking connectivity (e.g., Kruskal's MST, counting connected components) with nearly $O(1)$ complexity.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Bit Manipulation and when is it necessary?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Bit Manipulation** performs operations directly on the binary representation of integers (`&`, `|`, `^`, etc.). It's necessary for high-performance low-level systems and for solving problems involving subsets, permissions, or quick parity checks.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Backtracking pattern for subset generation.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Backtracking is ideal for generating all possible permutations, combinations, or subsets. It explores a state-space tree by making a choice, recursively calling itself, and then **undoing the choice** (backtracking) to explore the next alternative.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Memoization in DP.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Memoization (Top-Down DP)** is the process of caching the results of expensive function calls (subproblems) and returning the cached result when the same inputs occur again. It is implemented using recursion with an added cache (hash map/array).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            How does Dynamic Programming relate to recursion?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            All DP problems can be formulated recursively. DP is essentially **Recursion + Memoization (Top-Down)** or the iterative building of solutions from the base case **(Tabulation/Bottom-Up)**. The key is recognizing and efficiently solving overlapping recursive calls.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the K-way Merge pattern?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **K-way Merge** pattern efficiently merges $K$ sorted lists into a single sorted output list. It uses a **Min-Heap (Priority Queue)** to store the smallest element from each of the $K$ lists. Complexity is $O(N \log K)$.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the use of a Sentinel Node (Dummy Node) in Linked Lists.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Sentinel Node** is an extra, non-data node added at the beginning of a linked list. Its purpose is to simplify boundary conditions and edge cases, especially when inserting or deleting elements at the head of the list, by ensuring the list is never strictly null.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Greedy Algorithms and Dynamic Programming.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Greedy:** Makes the locally optimal choice at each stage without looking ahead, hoping for a global optimum.
+                            - **Dynamic Programming:** Explores all possibilities and guarantees the global optimum by solving subproblems (requires optimal substructure).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is an Interval Problem? Name two common solutions.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Interval Problems** involve finding overlaps, mergers, or scheduling based on a collection of time or numerical intervals.
+                            - **Common Solutions:** 1. **Sorting** the intervals (usually by start time). 2. **Sweep-Line** or Interval Merging techniques.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the logic behind Two Pointers from Opposite Ends in a sorted array.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Used in **sorted arrays** (e.g., Sum $A[i] + A[j] = Target$). Starting `left=0` and `right=n-1` allows $O(1)$ decision-making: if sum is too small, increment `left`; if too large, decrement `right`. This reduces complexity from $O(n^2)$ to $O(n)$.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the logic of Fast and Slow Pointers (Floyd's Cycle Detection).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Used primarily in Linked Lists. The **Fast Pointer** moves two steps at a time; the **Slow Pointer** moves one step. If the list contains a cycle, the fast pointer will eventually catch up to the slow pointer within the loop.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW SECTION: Cloud/DevOps -->
+            <div class="section" id="cloud_devops">
+                <div class="category">
+                    <h2>Cloud, Containers, and Deployment (DevOps)</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between Docker and a Virtual Machine (VM)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Virtual Machine (VM):</span> Emulates a **full OS** (including kernel). Large, slow to boot, strong isolation.<br><br>
+                            <span class="highlight">Docker (Containers):</span> Shares the **host OS kernel**. Lightweight, fast to boot, provides process isolation.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Kubernetes (K8s) and why is it needed?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Kubernetes</span> is a container orchestration platform that automates deploying, scaling, and managing containerized applications. **Needed for:** **Self-healing**, automated scaling, and service discovery for applications with hundreds of containers.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Continuous Integration (CI) vs Continuous Delivery (CD).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">CI (Integration):</span> Frequently merging code into a central repository where automated tests and builds are run (rapid feedback).<br><br>
+                            <span class="highlight">CD (Delivery):</span> Code is automatically built, tested, and ready for *manual* deployment.<br>
+                            **Continuous Deployment** means code is automatically deployed to production.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a CDN (Content Delivery Network)?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A <span class="highlight">CDN</span> is a distributed network of servers that caches static content (images, JS, CSS) at edge locations near the user. **Benefit:** Reduces latency and offloads traffic from the origin server.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Infrastructure as Code (IaC)? Name two tools.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **IaC** is the practice of managing infrastructure (servers, networks) using configuration files rather than manual processes. This makes infrastructure versionable and repeatable.
+                            - **Tools:** **Terraform** (cloud agnostic) and **CloudFormation** (AWS specific).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Serverless Computing.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Serverless** abstracts server management. The cloud provider handles dynamic allocation and scaling. Developers only pay for execution time (e.g., AWS Lambda, Azure Functions).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between IaaS, PaaS, and SaaS.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **IaaS (Infrastructure):** You manage OS, data, runtime (e.g., VMs).
+                            - **PaaS (Platform):** You manage application data/code; vendor manages OS/runtime (e.g., Heroku).
+                            - **SaaS (Software):** Vendor manages everything; you use the app (e.g., Gmail, Salesforce).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Immutable Infrastructure and pets vs. cattle?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Immutable Infrastructure:** Servers are **never modified** after deployment. Updates require replacing the old server with a new one.
+                            - **Pets vs. Cattle:** Servers are treated as "cattle" (disposable, easily replaceable) rather than "pets" (unique, manually maintained).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the main difference between Monorepo and Multirepo Git strategies.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Monorepo:** A single Git repository for *all* code/services. Simplifies dependency management and global refactoring.
+                            - **Multirepo:** Each service has its own dedicated repository. Simpler access control and clearer separation of concerns.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Git Rebase and when should you avoid it?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Git Rebase** moves or combines a sequence of commits to a new base, creating a clean, linear history.
+                            - **Avoidance:** **Never rebase commits that have already been pushed to a shared remote branch** as it breaks history for collaborators.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Observability (Metrics, Logs, Traces).
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Observability** is understanding internal system state from external outputs (the 3 pillars):
+                            1. **Metrics:** Numerical data over time (e.g., CPU usage, latency).
+                            2. **Logs:** Time-stamped records of discrete events (e.g., error messages).
+                            3. **Traces:** Records the path of a single request across multiple distributed services.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Service Mesh (e.g., Istio, Linkerd)?
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Service Mesh** is a dedicated infrastructure layer for handling service-to-service communication in microservices. It manages traffic routing, security (mTLS), and observability without requiring application code changes (often using **sidecar proxies**).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Blue/Green, Canary, and Rolling Deployments.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Rolling:** Gradually replaces old instances with new ones.
+                            - **Blue/Green:** Instant switch between two identical environments (Old=Blue, New=Green). Fast rollback.
+                            - **Canary:** Routes a small percentage of user traffic to the new version (Canary) for testing before full rollout. Safest approach.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the purpose of a Dockerfile.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Dockerfile** is a text file containing instructions used to automate the creation of a **Docker Image**. Each instruction (e.g., `FROM`, `RUN`, `COPY`) creates a new layer in the image.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is an API Gateway?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            An **API Gateway** acts as a single entry point for all client requests into a microservices system. It handles request routing, authentication, rate limiting, and composition before passing requests to the correct internal service.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Public, Private, and Hybrid Clouds.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Public Cloud:** Services offered over the public internet (AWS, Azure).
+                            - **Private Cloud:** Computing resources used exclusively by one organization (on-premise or secure data center).
+                            - **Hybrid Cloud:** Combines public and private clouds, allowing applications and data to be shared between them.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Container Orchestration?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Container Orchestration** is the automated management of container lifecycles, including provisioning, deployment, scaling, networking, and de-provisioning. **Kubernetes** is the leading tool.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Autoscaling.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Autoscaling** automatically adjusts the number of compute resources (servers/containers) allocated to an application in response to current load conditions (triggered by metrics like CPU utilization or latency).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Why are logs structured (JSON, key-value) in DevOps environments?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Structured Logging** makes logs machine-readable and easy to query across massive distributed systems. It enables automated parsing, filtering, and aggregation in centralized monitoring tools, which is difficult with unstructured (plain text) logs.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is CI/CD Pipeline as Code?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The practice of defining and managing the entire CI/CD pipeline configuration (stages, steps, testing logic) using scriptable files (e.g., YAML in GitHub Actions/Jenkins) stored in version control (Git). This applies **IaC** principles to the deployment process.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- NEW SECTION: AI/ML -->
+            <div class="section" id="ai_ml">
+                <div class="category">
+                    <h2>AI and Machine Learning Fundamentals</h2>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Difference between Supervised, Unsupervised, and Reinforcement Learning.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Supervised:</span> Learns from **labeled data** (input-output pairs). Used for classification/regression.<br>
+                            <span class="highlight">Unsupervised:</span> Learns from **unlabeled data** to find patterns. Used for clustering/dimensionality reduction.<br>
+                            <span class="highlight">Reinforcement:</span> Learns by interacting with an environment, receiving rewards (game AI/robotics).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the Bias-Variance Trade-off.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - <span class="highlight">Bias (Underfitting):</span> Error due to overly simplistic assumptions (model misses relationships).<br>
+                            - <span class="highlight">Variance (Overfitting):</span> Error due to excessive sensitivity to training data (model performs poorly on unseen data).<br>
+                            The goal is to balance the two for optimal generalization.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Overfitting and how do you prevent it?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Overfitting</span> occurs when a model learns the noise of the training data too well, failing to generalize.
+                            - **Prevention:** **Cross-Validation**, **Regularization (L1/L2)**, **Early Stopping**, and **Dropout** (in NNs).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the role of Gradient Descent.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            <span class="highlight">Gradient Descent</span> is the primary optimization algorithm used to train models. It iteratively adjusts the model's parameters (weights) to minimize the **Cost Function** (error) by moving in the *opposite* direction of the gradient (slope).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain Logistic Regression and its use case.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Logistic Regression** is a **classification** algorithm used to predict a discrete outcome (e.g., 0 or 1). It uses the **sigmoid function** ($\sigma(z) = \frac{1}{1 + e^{-z}}$) to map the output of a linear equation to a probability between 0 and 1.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Differentiate between Model Accuracy, Precision, and Recall.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Accuracy:** Overall correctness (Correct Predictions / Total Predictions).
+                            - **Precision:** Of all predicted positives, how many were correct? (Minimizes False Positives).
+                            - **Recall:** Of all actual positives, how many were correctly predicted? (Minimizes False Negatives).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What are Activation Functions and why are they needed in Neural Networks?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            An **Activation Function** (e.g., ReLU) introduces **non-linearity** to the network, allowing it to learn complex, non-linear relationships in data. Without them, the network would only be able to model linear functions.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between CNNs and RNNs.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **CNN (Convolutional Neural Network):** Specialized for **image** data (grid-like topology). Uses convolutional layers to learn spatial features.
+                            - **RNN (Recurrent Neural Network):** Specialized for **sequential** data (text, time series). Has internal memory loops to persist information.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Feature Engineering?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Feature Engineering** is the process of using domain knowledge to select, transform, combine, and create relevant variables (features) from raw data. It is often the most critical step for improving model performance.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe the concept of Dimensionality Reduction. Name two techniques.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Dimensionality Reduction** reduces the number of input variables while retaining important information.
+                            - **Purpose:** Speeds up training, saves memory, and avoids the **"Curse of Dimensionality."**
+                            - **Techniques:** **PCA** (Principal Component Analysis) and **t-SNE**.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the difference between Batch Gradient Descent and Stochastic Gradient Descent?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Batch GD:** Calculates the gradient using **all** training examples in each iteration. Slow but precise convergence.
+                            - **Stochastic GD (SGD):** Calculates the gradient using **only one** randomly chosen training example in each iteration. Much faster iterations, but noisier convergence.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is NLP (Natural Language Processing)? Give a task example.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **NLP** is the branch of AI that enables computers to understand and derive meaning from human languages.
+                            - **Task Examples:** Sentiment Analysis, Machine Translation, Text Summarization.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the difference between Backpropagation and Gradient Descent.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Gradient Descent:** The overall optimization *algorithm* used to minimize the cost function.
+                            - **Backpropagation:** The method (or mechanism) used to efficiently calculate the **gradients** needed for the Gradient Descent algorithm in a neural network (propagates error backward).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Clustering? Name two algorithms.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Clustering** is an **unsupervised learning** task where data points are grouped based on similarity.
+                            - **Algorithms:** **K-Means** (partitions data into $K$ spherical clusters) and **DBSCAN** (discovers clusters of arbitrary shape).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is the F1 Score and when is it preferred over Accuracy?
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            The **F1 Score** is the harmonic mean of Precision and Recall. It is preferred over Accuracy when dealing with **imbalanced datasets** to provide a better measure of the model's performance on the minority class.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Hyperparameter? Give two examples.
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Hyperparameters** are parameters whose values are set *before* the learning process begins (control the structure/process).
+                            - **Examples:** **Learning Rate**, **Number of Layers** in a Neural Network, **Number of Clusters** ($K$).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Explain the concept of Transfer Learning.
+                            <span class="difficulty hard">Hard</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            **Transfer Learning** reuses a model developed for a task (e.g., image recognition) as the starting point for a second, related task. This involves taking a pre-trained model (e.g., VGG) and fine-tuning only the last few layers on a new, smaller dataset, saving time and data.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is a Loss Function (Cost Function)? Name two common ones.
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            A **Loss Function** quantifies the difference between the model's predicted output and the actual expected output (the error). The goal of training is to minimize this loss.
+                            - **Examples:** **Mean Squared Error (MSE)** (for regression) and **Cross-Entropy Loss** (for classification).
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            What is Epoch, Batch Size, and Iteration?
+                            <span class="difficulty easy">Easy</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            - **Epoch:** One complete pass through the entire training dataset.
+                            - **Batch Size:** The number of training examples processed in one forward/backward pass.
+                            - **Iteration:** The number of batches needed to complete one epoch.
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question">
+                            Describe two common types of Regularization (L1 and L2).
+                            <span class="difficulty medium">Medium</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="answer">
+                            Regularization prevents overfitting by adding a penalty to the loss function:
+                            - **L2 Regularization (Ridge):** Penalizes the squared magnitude of weights. Shrinks all weights toward zero.
+                            - **L1 Regularization (Lasso):** Penalizes the absolute value of weights. Tends to push irrelevant feature weights to exactly zero (performs feature selection).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <footer>
+            &copy; 2025 Interview Prep Guide | Powered by Computer Science Fundamentals
+        </footer>
+    </div>
+
+    <!-- The JavaScript to handle interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.section');
+            const searchInput = document.getElementById('searchInput');
+            const contentArea = document.querySelector('.content');
+
+            // --- Tab Switching Logic ---
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs and sections
+                    tabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Clear search input on tab switch
+                    searchInput.value = '';
+                    document.querySelectorAll('.question-card').forEach(card => card.style.display = 'block');
+
+                    // Activate the clicked tab and corresponding section
+                    const sectionId = tab.dataset.section;
+                    document.getElementById(sectionId).classList.add('active');
+                    tab.classList.add('active');
+                });
+            });
+
+            // --- Accordion (Expand/Collapse) Logic ---
+            contentArea.addEventListener('click', (event) => {
+                // Use closest to ensure the click anywhere on the .question element works
+                const questionElement = event.target.closest('.question');
+                if (questionElement) {
+                    const card = questionElement.closest('.question-card');
+                    const answer = card.querySelector('.answer');
+
+                    // Toggle answer visibility
+                    const isExpanded = answer.classList.contains('show');
+                    if (isExpanded) {
+                        answer.classList.remove('show');
+                        card.classList.remove('expanded');
+                    } else {
+                        // Collapse all other answers in the current section for cleaner view
+                        document.querySelectorAll('.section.active .question-card.expanded').forEach(c => {
+                            c.querySelector('.answer').classList.remove('show');
+                            c.classList.remove('expanded');
+                        });
+                        
+                        answer.classList.add('show');
+                        card.classList.add('expanded');
+                    }
+                }
+            });
+
+            // --- Search/Filter Logic ---
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                const activeSection = document.querySelector('.section.active');
+                
+                // Only search within the active tab's questions
+                const cards = activeSection.querySelectorAll('.question-card');
+
+                cards.forEach(card => {
+                    // Get text from question and answer (even if hidden)
+                    const questionText = card.querySelector('.question').textContent.toLowerCase();
+                    const answerText = card.querySelector('.answer').textContent.toLowerCase();
+
+                    // Check if the query is in the question or the answer
+                    if (questionText.includes(query) || answerText.includes(query) || query === '') {
+                        card.style.display = 'block'; // Show card
+                    } else {
+                        card.style.display = 'none'; // Hide card
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
