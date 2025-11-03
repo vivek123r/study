@@ -267,6 +267,234 @@
             opacity: 0.9;
         }
 
+        /* Quiz Styles */
+        .quiz-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .quiz-category-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .quiz-category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .quiz-category-card h3 {
+            margin: 10px 0;
+            font-size: 1.3em;
+        }
+
+        .quiz-category-card p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .quiz-container {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-container.active {
+            display: block;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .quiz-progress {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .quiz-score {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #764ba2;
+        }
+
+        .quiz-question-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            margin-bottom: 20px;
+        }
+
+        .quiz-question-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.05em;
+        }
+
+        .quiz-option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .quiz-option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .quiz-option.correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .quiz-option.incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .quiz-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-btn-secondary {
+            background: #6c757d;
+        }
+
+        .quiz-results {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .quiz-results.active {
+            display: block;
+        }
+
+        .results-score {
+            font-size: 4em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .results-message {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin: 20px 0;
+        }
+
+        .results-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            display: inline-block;
+        }
+
+        .result-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            font-size: 1.1em;
+        }
+
+        .result-stat-label {
+            font-weight: 600;
+            margin-right: 30px;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .quiz-feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 0;
@@ -293,13 +521,26 @@
             .category {
                 padding-left: 10px;
             }
+            .quiz-category-grid {
+                grid-template-columns: 1fr;
+            }
+            .quiz-question-card {
+                padding: 20px;
+            }
+            .quiz-question-text {
+                font-size: 1.1em;
+            }
+            .quiz-header {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚀 Technical Interview Preparation</h1>
+            <div><h1>🚀 Technical Interview Preparation</h1> </div>
             <p class="subtitle">Complete Computer Science Guide for UST & Tech Interviews</p>
         </header>
 
@@ -318,6 +559,7 @@
             <div class="tab" data-section="coding">Coding Patterns</div>
             <div class="tab" data-section="cloud_devops">Cloud/DevOps</div>
             <div class="tab" data-section="ai_ml">AI/ML</div>
+            <div class="tab" data-section="quiz">🎯 Quiz</div>
         </div>
 
         <div class="content">
@@ -2832,6 +3074,98 @@
                 </div>
             </div>
 
+            <!-- QUIZ SECTION -->
+            <div class="section" id="quiz">
+                <div class="category">
+                    <h2>🎯 Test Your Knowledge</h2>
+                    
+                    <!-- Quiz Selection Screen -->
+                    <div id="quiz-selection">
+                        <p style="font-size: 1.1em; margin-bottom: 30px; color: #555;">
+                            Choose a category to test your knowledge. Each quiz contains 10 questions with instant feedback!
+                        </p>
+
+                        <div class="quiz-category-grid">
+                            <div class="quiz-category-card" onclick="startQuiz('oop')">
+                                <div class="category-icon">💎</div>
+                                <h3>OOP</h3>
+                                <p>10 Questions</p>
+                            </div>
+                            <div class="quiz-category-card" onclick="startQuiz('dsa')">
+                                <div class="category-icon">🔢</div>
+                                <h3>DSA</h3>
+                                <p>10 Questions</p>
+                            </div>
+                            <div class="quiz-category-card" onclick="startQuiz('dbms')">
+                                <div class="category-icon">🗄️</div>
+                                <h3>DBMS</h3>
+                                <p>10 Questions</p>
+                            </div>
+                            <div class="quiz-category-card" onclick="startQuiz('os')">
+                                <div class="category-icon">⚙️</div>
+                                <h3>Operating Systems</h3>
+                                <p>10 Questions</p>
+                            </div>
+                            <div class="quiz-category-card" onclick="startQuiz('networks')">
+                                <div class="category-icon">🌐</div>
+                                <h3>Networks</h3>
+                                <p>10 Questions</p>
+                            </div>
+                            <div class="quiz-category-card" onclick="startQuiz('web')">
+                                <div class="category-icon">🌍</div>
+                                <h3>Web Development</h3>
+                                <p>10 Questions</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Container -->
+                    <div id="quiz-container" class="quiz-container">
+                        <div class="quiz-header">
+                            <div class="quiz-progress">
+                                Question <span id="current-question">1</span> of <span id="total-questions">10</span>
+                            </div>
+                            <div class="quiz-score">
+                                Score: <span id="quiz-score">0</span>/<span id="quiz-total">0</span>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question-card">
+                            <div class="quiz-question-text" id="question-text"></div>
+                            <div class="quiz-options" id="quiz-options"></div>
+                            <div id="quiz-feedback"></div>
+                        </div>
+
+                        <div class="quiz-navigation">
+                            <button class="quiz-btn quiz-btn-secondary" onclick="exitQuiz()">Exit Quiz</button>
+                            <button class="quiz-btn" id="next-btn" onclick="nextQuestion()" disabled>Next Question</button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Results -->
+                    <div id="quiz-results" class="quiz-results">
+                        <h2>🎉 Quiz Complete!</h2>
+                        <div class="results-score" id="final-score"></div>
+                        <div class="results-message" id="results-message"></div>
+                        <div class="results-details">
+                            <div class="result-stat">
+                                <span class="result-stat-label">Correct Answers:</span>
+                                <span id="correct-count" style="color: #28a745; font-weight: bold;"></span>
+                            </div>
+                            <div class="result-stat">
+                                <span class="result-stat-label">Incorrect Answers:</span>
+                                <span id="incorrect-count" style="color: #dc3545; font-weight: bold;"></span>
+                            </div>
+                            <div class="result-stat">
+                                <span class="result-stat-label">Accuracy:</span>
+                                <span id="accuracy" style="color: #667eea; font-weight: bold;"></span>
+                            </div>
+                        </div>
+                        <button class="quiz-btn" onclick="restartQuiz()">Take Another Quiz</button>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -2914,6 +3248,509 @@
                 });
             });
         });
+
+        // ===== QUIZ FUNCTIONALITY =====
+        
+        const quizData = {
+            oop: [
+                {
+                    question: "What are the four pillars of OOP?",
+                    options: ["Encapsulation, Inheritance, Polymorphism, Abstraction", "Classes, Objects, Methods, Variables", "Data, Functions, Arrays, Strings", "None of the above"],
+                    correct: 0,
+                    explanation: "The four pillars of OOP are Encapsulation (data hiding), Inheritance (code reuse), Polymorphism (many forms), and Abstraction (hiding complexity)."
+                },
+                {
+                    question: "What is the main difference between Abstract Class and Interface?",
+                    options: ["Abstract class can have constructors, Interface cannot", "Interface supports multiple inheritance, Abstract class doesn't", "Both A and B", "No difference"],
+                    correct: 2,
+                    explanation: "Abstract classes can have constructors and concrete methods, while interfaces support multiple inheritance and only define contracts."
+                },
+                {
+                    question: "What is method overloading?",
+                    options: ["Same method name, different parameters (compile-time)", "Same method name, same parameters", "Different method names", "Runtime polymorphism"],
+                    correct: 0,
+                    explanation: "Method overloading is compile-time polymorphism where multiple methods have the same name but different parameters."
+                },
+                {
+                    question: "Which SOLID principle states 'A class should have only one reason to change'?",
+                    options: ["Open/Closed Principle", "Single Responsibility Principle", "Liskov Substitution Principle", "Dependency Inversion Principle"],
+                    correct: 1,
+                    explanation: "The Single Responsibility Principle (SRP) states that a class should have only one reason to change, meaning it should have only one job."
+                },
+                {
+                    question: "What is the purpose of the 'super' keyword?",
+                    options: ["Create a new object", "Refer to parent class members", "Delete an object", "Define a static method"],
+                    correct: 1,
+                    explanation: "The 'super' keyword is used to refer to the immediate parent class's members (variables, methods, or constructors)."
+                },
+                {
+                    question: "What is composition in OOP?",
+                    options: ["A 'has-a' relationship where one class contains another", "Same as inheritance", "A method calling itself", "Multiple inheritance"],
+                    correct: 0,
+                    explanation: "Composition represents a 'has-a' relationship where one class contains instances of other classes to gain their functionality."
+                },
+                {
+                    question: "What is the Diamond Problem?",
+                    options: ["A memory leak issue", "Ambiguity in multiple inheritance", "A sorting algorithm", "A design pattern"],
+                    correct: 1,
+                    explanation: "The Diamond Problem occurs in multiple inheritance when a class inherits from two classes that both inherit from a common parent, creating ambiguity."
+                },
+                {
+                    question: "What is a Singleton pattern?",
+                    options: ["Ensures a class has only one instance", "Creates multiple objects", "A sorting algorithm", "A database pattern"],
+                    correct: 0,
+                    explanation: "Singleton is a creational design pattern that ensures a class has only one instance and provides a global point of access to it."
+                },
+                {
+                    question: "What is the difference between Stack and Heap memory?",
+                    options: ["Stack stores local variables, Heap stores objects", "Both are the same", "Stack is slower than Heap", "Heap is used for function calls"],
+                    correct: 0,
+                    explanation: "Stack is used for static memory allocation (local variables, function calls) while Heap is used for dynamic memory allocation (objects)."
+                },
+                {
+                    question: "What is immutability?",
+                    options: ["An object whose state cannot be modified after creation", "An object that changes frequently", "A mutable string", "A database property"],
+                    correct: 0,
+                    explanation: "Immutability means an object's state cannot be modified after it is created, making it inherently thread-safe."
+                }
+            ],
+            dsa: [
+                {
+                    question: "What is the time complexity of Binary Search?",
+                    options: ["O(n)", "O(log n)", "O(n²)", "O(1)"],
+                    correct: 1,
+                    explanation: "Binary Search has O(log n) time complexity because it divides the search space in half with each iteration."
+                },
+                {
+                    question: "What is the difference between BFS and DFS?",
+                    options: ["BFS uses Queue, DFS uses Stack", "Both use Queue", "Both use Stack", "BFS is always faster"],
+                    correct: 0,
+                    explanation: "BFS (Breadth-First Search) uses a Queue and explores level by level, while DFS (Depth-First Search) uses a Stack/Recursion and explores as deep as possible."
+                },
+                {
+                    question: "What is the worst-case time complexity of QuickSort?",
+                    options: ["O(n log n)", "O(n²)", "O(n)", "O(log n)"],
+                    correct: 1,
+                    explanation: "QuickSort has O(n²) worst-case time complexity (when pivot is always smallest/largest), but O(n log n) average case."
+                },
+                {
+                    question: "What data structure is used to implement a Priority Queue?",
+                    options: ["Array", "Linked List", "Heap", "Stack"],
+                    correct: 2,
+                    explanation: "A Heap (Min-Heap or Max-Heap) is the most efficient data structure for implementing a Priority Queue with O(log n) insertions."
+                },
+                {
+                    question: "What is a Trie used for?",
+                    options: ["Sorting numbers", "Storing strings with common prefixes", "Graph traversal", "Memory management"],
+                    correct: 1,
+                    explanation: "A Trie (Prefix Tree) is used for efficiently storing and searching strings with common prefixes, useful in autocomplete and spell checkers."
+                },
+                {
+                    question: "What does Dynamic Programming require?",
+                    options: ["Overlapping subproblems and optimal substructure", "Only recursion", "Only iteration", "Random access"],
+                    correct: 0,
+                    explanation: "Dynamic Programming requires overlapping subproblems (same subproblems solved multiple times) and optimal substructure (optimal solution contains optimal solutions to subproblems)."
+                },
+                {
+                    question: "What is the space complexity of Merge Sort?",
+                    options: ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+                    correct: 2,
+                    explanation: "Merge Sort requires O(n) auxiliary space to store the merged subarrays during the sorting process."
+                },
+                {
+                    question: "In a Binary Search Tree, what is true?",
+                    options: ["Left child < Parent < Right child", "Left child > Parent > Right child", "No specific order", "All nodes are equal"],
+                    correct: 0,
+                    explanation: "In a BST, for any node, all values in the left subtree are less than the node's value, and all values in the right subtree are greater."
+                },
+                {
+                    question: "What is the primary purpose of hashing?",
+                    options: ["Sorting data", "Achieving O(1) average lookup time", "Compressing files", "Encrypting data"],
+                    correct: 1,
+                    explanation: "Hashing provides O(1) average-case time complexity for search, insert, and delete operations by converting keys into array indices."
+                },
+                {
+                    question: "What is Dijkstra's algorithm used for?",
+                    options: ["Sorting arrays", "Finding shortest path in weighted graphs", "Tree traversal", "String matching"],
+                    correct: 1,
+                    explanation: "Dijkstra's algorithm finds the shortest paths from a single source node to all other nodes in a graph with non-negative edge weights."
+                }
+            ],
+            dbms: [
+                {
+                    question: "What does ACID stand for in database systems?",
+                    options: ["Atomicity, Consistency, Isolation, Durability", "Array, Class, Interface, Data", "Addition, Condition, Integration, Deletion", "None of the above"],
+                    correct: 0,
+                    explanation: "ACID properties ensure reliable database transactions: Atomicity (all or nothing), Consistency (valid state), Isolation (concurrent independence), Durability (permanent changes)."
+                },
+                {
+                    question: "What is the purpose of normalization?",
+                    options: ["Speed up queries", "Reduce data redundancy and improve integrity", "Increase storage space", "Encrypt data"],
+                    correct: 1,
+                    explanation: "Normalization organizes data to reduce redundancy and improve data integrity by dividing tables and defining relationships."
+                },
+                {
+                    question: "What is a Primary Key?",
+                    options: ["Can be NULL", "Uniquely identifies each record, cannot be NULL", "Can have duplicates", "Optional field"],
+                    correct: 1,
+                    explanation: "A Primary Key uniquely identifies each record in a table, cannot contain NULL values, and there can only be one per table."
+                },
+                {
+                    question: "Which JOIN returns all records from both tables?",
+                    options: ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL JOIN"],
+                    correct: 3,
+                    explanation: "FULL JOIN (or FULL OUTER JOIN) returns all records from both tables, with NULLs where there are no matches."
+                },
+                {
+                    question: "What is an Index in a database?",
+                    options: ["A data structure that speeds up data retrieval", "A backup copy", "A constraint", "A table relationship"],
+                    correct: 0,
+                    explanation: "An Index is a data structure (like B-Tree) that speeds up SELECT queries but slows down INSERT, UPDATE, and DELETE operations."
+                },
+                {
+                    question: "What is the difference between DELETE and TRUNCATE?",
+                    options: ["DELETE can be rolled back, TRUNCATE cannot", "Both are exactly the same", "TRUNCATE is slower", "DELETE removes the table structure"],
+                    correct: 0,
+                    explanation: "DELETE is a DML command that can be rolled back and removes specific rows, while TRUNCATE is a DDL command that cannot be rolled back and removes all rows quickly."
+                },
+                {
+                    question: "What is 3NF (Third Normal Form)?",
+                    options: ["No transitive dependency", "Atomic values only", "No partial dependency", "All of the above"],
+                    correct: 0,
+                    explanation: "3NF requires that a table is in 2NF and has no transitive dependencies (non-key attribute depending on another non-key attribute)."
+                },
+                {
+                    question: "What does SQL Injection exploit?",
+                    options: ["Hardware vulnerabilities", "Unsanitized user input in SQL queries", "Network protocols", "Operating system bugs"],
+                    correct: 1,
+                    explanation: "SQL Injection exploits unsanitized user input to execute malicious SQL commands. Prevention: use prepared statements/parameterized queries."
+                },
+                {
+                    question: "What is the difference between OLTP and OLAP?",
+                    options: ["OLTP handles transactions, OLAP handles analysis", "Both are the same", "OLAP is faster for transactions", "OLTP is used for data warehousing"],
+                    correct: 0,
+                    explanation: "OLTP (Online Transaction Processing) handles day-to-day transactions with high volume of small operations, while OLAP (Online Analytical Processing) analyzes large historical datasets."
+                },
+                {
+                    question: "What is a Foreign Key?",
+                    options: ["References Primary Key of another table", "Uniquely identifies records", "Can be NULL always", "Same as Primary Key"],
+                    correct: 0,
+                    explanation: "A Foreign Key is a field that references the Primary Key of another table, enforcing referential integrity between tables."
+                }
+            ],
+            os: [
+                {
+                    question: "What is the main difference between Process and Thread?",
+                    options: ["Process has separate memory, Thread shares memory", "Both are exactly the same", "Thread has separate memory", "Process is faster"],
+                    correct: 0,
+                    explanation: "A Process has its own separate memory space, while Threads within the same process share the memory space, making context switching faster."
+                },
+                {
+                    question: "What are the four conditions necessary for Deadlock?",
+                    options: ["Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait", "Only one condition needed", "Random conditions", "None of the above"],
+                    correct: 0,
+                    explanation: "All four conditions must be present simultaneously for deadlock: Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait."
+                },
+                {
+                    question: "What is the purpose of Virtual Memory?",
+                    options: ["Extend RAM using disk space", "Speed up CPU", "Encrypt data", "Backup files"],
+                    correct: 0,
+                    explanation: "Virtual Memory uses disk storage as an extension of RAM, creating the illusion of large memory and allowing programs larger than physical RAM to run."
+                },
+                {
+                    question: "What is a System Call?",
+                    options: ["User function", "Interface between application and OS kernel", "Database query", "Network request"],
+                    correct: 1,
+                    explanation: "A System Call is the mechanism used by application programs to request services from the operating system's kernel (e.g., read(), write(), fork())."
+                },
+                {
+                    question: "What is the difference between Paging and Segmentation?",
+                    options: ["Paging uses fixed-size blocks, Segmentation uses variable-size blocks", "Both use fixed sizes", "Both use variable sizes", "No difference"],
+                    correct: 0,
+                    explanation: "Paging divides memory into fixed-size pages/frames, while Segmentation divides memory into variable-sized segments based on logical divisions."
+                },
+                {
+                    question: "What is Context Switching?",
+                    options: ["Saving state of current process and loading next process", "Switching users", "Changing programs", "Updating files"],
+                    correct: 0,
+                    explanation: "Context Switching is the process where the OS saves the state (context) of the current process and loads the saved state of the next process."
+                },
+                {
+                    question: "What is Thrashing?",
+                    options: ["Process spends more time paging than executing", "Fast execution", "Efficient memory usage", "CPU overheating"],
+                    correct: 0,
+                    explanation: "Thrashing occurs when a process spends more time swapping pages in and out of memory than executing instructions, causing severe performance degradation."
+                },
+                {
+                    question: "What is the difference between Mutex and Semaphore?",
+                    options: ["Mutex is binary lock, Semaphore can be counting", "Both are exactly the same", "Mutex is slower", "Semaphore is obsolete"],
+                    correct: 0,
+                    explanation: "Mutex is a simple binary lock for mutual exclusion (only one thread), while Semaphore is a signaling mechanism that can be binary or counting (multiple threads)."
+                },
+                {
+                    question: "What is the purpose of the Banker's Algorithm?",
+                    options: ["Banking transactions", "Deadlock avoidance", "Scheduling processes", "Memory allocation"],
+                    correct: 1,
+                    explanation: "The Banker's Algorithm is used for deadlock avoidance by determining if allocating resources will leave the system in a safe state."
+                },
+                {
+                    question: "What is the difference between Internal and External Fragmentation?",
+                    options: ["Internal: wasted space within block, External: scattered free space", "Both are the same", "Internal is worse", "External doesn't exist"],
+                    correct: 0,
+                    explanation: "Internal Fragmentation is wasted space within allocated memory blocks, while External Fragmentation is free memory scattered in small non-contiguous chunks."
+                }
+            ],
+            networks: [
+                {
+                    question: "What is the main difference between TCP and UDP?",
+                    options: ["TCP is connection-oriented and reliable, UDP is connectionless and unreliable", "UDP is always better", "Both are the same", "TCP is faster"],
+                    correct: 0,
+                    explanation: "TCP provides reliable, ordered delivery with connection establishment (3-way handshake), while UDP is faster but doesn't guarantee delivery or order."
+                },
+                {
+                    question: "What does DNS do?",
+                    options: ["Encrypts data", "Translates domain names to IP addresses", "Compresses files", "Scans for viruses"],
+                    correct: 1,
+                    explanation: "DNS (Domain Name System) translates human-readable domain names (e.g., example.com) into IP addresses that computers use to communicate."
+                },
+                {
+                    question: "What are the steps in the TCP 3-Way Handshake?",
+                    options: ["SYN, SYN-ACK, ACK", "ACK, SYN, ACK", "SYN, SYN, SYN", "ACK, ACK, ACK"],
+                    correct: 0,
+                    explanation: "TCP connection establishment: 1) Client sends SYN, 2) Server sends SYN-ACK, 3) Client sends ACK. Connection is established."
+                },
+                {
+                    question: "What is the difference between HTTP and HTTPS?",
+                    options: ["HTTPS is encrypted using TLS/SSL", "HTTP is faster", "No difference", "HTTPS uses UDP"],
+                    correct: 0,
+                    explanation: "HTTPS encrypts data using TLS/SSL protocol, ensuring confidentiality, integrity, and authentication, while HTTP sends data in plain text."
+                },
+                {
+                    question: "What layer does a Router operate at in the OSI model?",
+                    options: ["Physical Layer", "Data Link Layer", "Network Layer", "Application Layer"],
+                    correct: 2,
+                    explanation: "Routers operate at the Network Layer (Layer 3) and make routing decisions based on IP addresses to connect different networks."
+                },
+                {
+                    question: "What is the purpose of NAT?",
+                    options: ["Maps private IPs to public IPs", "Encrypts data", "Speeds up internet", "Blocks viruses"],
+                    correct: 0,
+                    explanation: "NAT (Network Address Translation) maps many private IP addresses to fewer public IP addresses, conserving IPv4 addresses and adding basic security."
+                },
+                {
+                    question: "What is ARP used for?",
+                    options: ["Maps IP address to MAC address", "Maps domain to IP", "Encrypts packets", "Routes packets"],
+                    correct: 0,
+                    explanation: "ARP (Address Resolution Protocol) maps an IP address (Layer 3) to a corresponding MAC address (Layer 2) within the same local network."
+                },
+                {
+                    question: "What is a Firewall?",
+                    options: ["Hardware component", "Monitors and controls network traffic based on rules", "Antivirus software", "Backup system"],
+                    correct: 1,
+                    explanation: "A Firewall monitors and controls incoming/outgoing network traffic based on security rules, acting as a barrier between trusted and untrusted networks."
+                },
+                {
+                    question: "What is the difference between IPv4 and IPv6?",
+                    options: ["IPv4 is 32-bit, IPv6 is 128-bit", "Both are 32-bit", "IPv4 is newer", "No significant difference"],
+                    correct: 0,
+                    explanation: "IPv4 uses 32-bit addresses (limited to ~4.3 billion), while IPv6 uses 128-bit addresses, solving address exhaustion and adding native security features."
+                },
+                {
+                    question: "What HTTP status code indicates 'Not Found'?",
+                    options: ["200", "301", "404", "500"],
+                    correct: 2,
+                    explanation: "HTTP status code 404 means 'Not Found' - the server cannot find the requested resource. Other common codes: 200 (OK), 500 (Server Error)."
+                }
+            ],
+            web: [
+                {
+                    question: "What is the Event Loop in JavaScript?",
+                    options: ["Handles asynchronous operations", "A loop statement", "An error handler", "A database query"],
+                    correct: 0,
+                    explanation: "The Event Loop allows JavaScript to perform non-blocking asynchronous operations by moving callbacks from the Callback Queue to the Call Stack when the stack is empty."
+                },
+                {
+                    question: "What is the difference between '==' and '===' in JavaScript?",
+                    options: ["== performs type coercion, === does not", "Both are exactly the same", "=== is slower", "== is stricter"],
+                    correct: 0,
+                    explanation: "== (equality) performs type coercion before comparison, while === (strict equality) compares both value and type without coercion. Always prefer ===."
+                },
+                {
+                    question: "What is a Closure in JavaScript?",
+                    options: ["A function with access to its outer scope", "A loop", "An object", "A class"],
+                    correct: 0,
+                    explanation: "A Closure is a function bundled with its lexical environment, allowing it to access variables from an outer scope even after the outer function has finished executing."
+                },
+                {
+                    question: "What is CORS?",
+                    options: ["Cross-Origin Resource Sharing - browser security mechanism", "A CSS framework", "A database", "An HTML tag"],
+                    correct: 0,
+                    explanation: "CORS is a browser security mechanism that restricts cross-domain requests. Servers must explicitly allow cross-origin requests via Access-Control headers."
+                },
+                {
+                    question: "What is the difference between Local Storage and Session Storage?",
+                    options: ["Local Storage persists after browser close, Session Storage doesn't", "Both are exactly the same", "Session Storage is larger", "Local Storage is slower"],
+                    correct: 0,
+                    explanation: "Local Storage persists data even after the browser is closed, while Session Storage is cleared when the browser tab is closed. Both store up to ~5MB."
+                },
+                {
+                    question: "What does REST stand for?",
+                    options: ["Representational State Transfer", "Remote Execution Service Tool", "Real-time State Tracking", "None of the above"],
+                    correct: 0,
+                    explanation: "REST (Representational State Transfer) is an architectural style for APIs using HTTP methods (GET, POST, PUT, DELETE) and stateless communication."
+                },
+                {
+                    question: "What is the purpose of 'use strict' in JavaScript?",
+                    options: ["Enables strict mode to catch common errors", "Makes code faster", "Disables JavaScript", "Compresses code"],
+                    correct: 0,
+                    explanation: "'use strict' enables strict mode, which catches common coding errors, prevents use of undeclared variables, and disables some confusing features."
+                },
+                {
+                    question: "What is the Virtual DOM in React?",
+                    options: ["Lightweight copy of actual DOM for efficient updates", "A database", "A server", "An HTML element"],
+                    correct: 0,
+                    explanation: "Virtual DOM is a lightweight JavaScript representation of the actual DOM. React uses it to efficiently determine minimal changes needed before updating the real DOM."
+                },
+                {
+                    question: "What is the difference between call(), apply(), and bind()?",
+                    options: ["call/apply execute immediately, bind returns new function", "All are exactly the same", "bind is faster", "call is obsolete"],
+                    correct: 0,
+                    explanation: "call() and apply() execute immediately (apply takes array of args), while bind() returns a new function with the 'this' context permanently set."
+                },
+                {
+                    question: "What is SSR (Server-Side Rendering)?",
+                    options: ["Server generates HTML before sending to browser", "Client-side only", "A database technique", "A CSS method"],
+                    correct: 0,
+                    explanation: "SSR means the server renders the full HTML page before sending it to the browser, improving SEO and initial page load performance."
+                }
+            ]
+        };
+
+        let currentQuiz = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let selectedAnswer = null;
+
+        function startQuiz(category) {
+            currentQuiz = quizData[category];
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            selectedAnswer = null;
+
+            // Shuffle questions
+            currentQuiz = currentQuiz.sort(() => Math.random() - 0.5);
+
+            document.getElementById('quiz-selection').style.display = 'none';
+            document.getElementById('quiz-container').classList.add('active');
+            document.getElementById('quiz-results').classList.remove('active');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= currentQuiz.length) {
+                showResults();
+                return;
+            }
+
+            const question = currentQuiz[currentQuestionIndex];
+            selectedAnswer = null;
+
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = currentQuiz.length;
+            document.getElementById('quiz-score').textContent = score;
+            document.getElementById('quiz-total').textContent = currentQuestionIndex;
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('quiz-feedback').innerHTML = '';
+            document.getElementById('next-btn').disabled = true;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'quiz-option';
+                optionDiv.textContent = option;
+                optionDiv.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+        }
+
+        function selectAnswer(answerIndex) {
+            if (selectedAnswer !== null) return; // Already answered
+
+            selectedAnswer = answerIndex;
+            const question = currentQuiz[currentQuestionIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            const feedbackDiv = document.getElementById('quiz-feedback');
+
+            options.forEach((opt, idx) => {
+                opt.classList.add('disabled');
+                if (idx === question.correct) {
+                    opt.classList.add('correct');
+                }
+                if (idx === answerIndex && idx !== question.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            const isCorrect = answerIndex === question.correct;
+            if (isCorrect) {
+                score++;
+                feedbackDiv.className = 'quiz-feedback correct';
+                feedbackDiv.innerHTML = `<strong>✓ Correct!</strong> ${question.explanation}`;
+            } else {
+                feedbackDiv.className = 'quiz-feedback incorrect';
+                feedbackDiv.innerHTML = `<strong>✗ Incorrect.</strong> ${question.explanation}`;
+            }
+
+            userAnswers.push({ question: question.question, userAnswer: answerIndex, correct: question.correct, isCorrect });
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').classList.remove('active');
+            document.getElementById('quiz-results').classList.add('active');
+
+            const percentage = Math.round((score / currentQuiz.length) * 100);
+            document.getElementById('final-score').textContent = `${percentage}%`;
+            document.getElementById('correct-count').textContent = score;
+            document.getElementById('incorrect-count').textContent = currentQuiz.length - score;
+            document.getElementById('accuracy').textContent = `${percentage}%`;
+
+            let message = '';
+            if (percentage >= 90) message = '🏆 Outstanding! You\'re an expert!';
+            else if (percentage >= 70) message = '🎉 Great job! Keep it up!';
+            else if (percentage >= 50) message = '👍 Good effort! Review and try again.';
+            else message = '📚 Keep studying! Practice makes perfect.';
+
+            document.getElementById('results-message').textContent = message;
+        }
+
+        function exitQuiz() {
+            if (confirm('Are you sure you want to exit the quiz? Your progress will be lost.')) {
+                restartQuiz();
+            }
+        }
+
+        function restartQuiz() {
+            currentQuiz = null;
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            selectedAnswer = null;
+
+            document.getElementById('quiz-selection').style.display = 'block';
+            document.getElementById('quiz-container').classList.remove('active');
+            document.getElementById('quiz-results').classList.remove('active');
+        }
     </script>
 </body>
 </html>
